@@ -1,0 +1,21 @@
+.file-upload-section{
+  width: 100%;
+  height: 150px;
+  text-align: center;
+  border: 1px dashed #0076cb;
+  font-size: 60px;
+  color: #0076cb99;
+  position: relative;
+}
+
+.file-upload-section .inner-section{
+  position: absolute;
+  top: 25%;
+  left: 45%;
+}
+
+
+.file-upload-section .file-input{
+  display:none;
+  /* visibility: hidden; */
+}
