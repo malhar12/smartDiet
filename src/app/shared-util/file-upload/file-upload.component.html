@@ -1,4 +1,6 @@
 <div ng2FileDrop
+    #fileDropArea
+    (fileOver)="fileHovered($event)"
     (onFileDrop)="fileOverBase($event)"
     [uploader]="uploader"
     class="well file-upload-section">
