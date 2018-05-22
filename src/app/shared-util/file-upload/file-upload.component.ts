@@ -4,7 +4,7 @@ import { FileUploader } from 'ng2-file-upload';
 import fontawesome from '@fortawesome/fontawesome';
 import FaPlus from '@fortawesome/fontawesome-free-solid';
 
-const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
+const URL = './api/upload';
 
 @Component({
   selector: 'app-file-upload',
@@ -18,7 +18,9 @@ export class FileUploadComponent implements OnInit {
 
   constructor() {
     fontawesome.library.add(FaPlus);
-    this.uploader = new FileUploader({});
+    this.uploader = new FileUploader({
+      url: URL
+    });
   }
 
   ngOnInit() {
@@ -40,11 +42,13 @@ export class FileUploadComponent implements OnInit {
   fileSelected(event){
     // TODO
     console.log(event, 'SELECTED FILE');
+    this.uploader.queue[0].upload();
   }
 
   fileOverBase(event){
     // TODO
     console.log(event, 'SELECTED FILE');
+    this.uploader.queue[0].upload();
   }
 
 }
