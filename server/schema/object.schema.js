@@ -6,9 +6,8 @@ var Schema = mongoose.Schema;
 // Schema Object
 var schemaObj = {
   DishSchema: new Schema({
-    docketID: String,
-    name: String,
-    user: {type: String, required: false},
+    usserID: String,
+    name: {type: String, required: false},
     price: Number,
     imgLocation: String,
     type: String,
