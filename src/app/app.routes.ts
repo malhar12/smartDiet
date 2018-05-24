@@ -7,10 +7,6 @@ const routes: Routes = [
   {
     path: '',
     component: BuildMenuComponent
-  },
-  {
-    path: '**',
-    component: BuildMenuComponent
   }
 ];
 
