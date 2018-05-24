@@ -1,15 +1,15 @@
-<form>
+<form #dishForm="ngForm" (ngSubmit)="onFormSubmit(dishForm.value)" encrypt="multipart/form-data">
   <div class="form-group">
     <label for="nameInput1">Dish Name</label>
-    <input type="text" class="form-control" id="nameInput1" aria-describedby="emailHelp" placeholder="Enter dish name" pInputText>
+    <input type="text" class="form-control" id="nameInput1" ngModel name="name" aria-describedby="emailHelp" placeholder="Enter dish name" pInputText>
   </div>
   <div class="form-group">
     <label for="priceInput1">Price</label>
-    <input type="number" class="form-control" id="priceInput1" placeholder="Enter price" pInputText>
+    <input type="number" class="form-control" id="priceInput1" ngModel name="price" placeholder="Enter price" pInputText>
   </div>
   <div class="form-group">
     <label for="descriptionInput1">Description</label>
-    <textarea class="form-control" id="descriptionInput1" placeholder="Enter description" pInputTextarea></textarea>
+    <textarea class="form-control" id="descriptionInput1" ngModel name="description" placeholder="Enter description" pInputTextarea></textarea>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary" [disabled]="!enableForm">Submit</button>
 </form>

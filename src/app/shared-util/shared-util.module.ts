@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 
+import { UtilityService } from './services/utility.service';
+
 import { FileUploadModule } from 'ng2-file-upload';
 import {
   InputTextModule,
@@ -31,6 +33,7 @@ import { DishSetupFormComponent } from './dish-setup-form/dish-setup-form.compon
     FileUploadComponent,
     DishSetupFormComponent
   ],
-  declarations: [FileUploadComponent, DishSetupFormComponent]
+  declarations: [FileUploadComponent, DishSetupFormComponent],
+  providers: [UtilityService]
 })
-export class SharedUtilModule { }
+export class SharedUtilModule {}

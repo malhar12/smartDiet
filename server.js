@@ -9,15 +9,36 @@ const api = require('./server/routes/api');
 
 const app = express();
 
+const allowedExt = [
+  '.js',
+  '.ico',
+  '.css',
+  '.woff',
+  '.woff2',
+  '.ttf'
+];
+
+const allowedExtUpload = [
+  '.png',
+  '.jpg',
+  '.svg'
+];
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use('/api', api);
 
-app.use(express.static(path.join(__dirname, 'dist/smartDiet')));
+app.use(express.static(path.join(__dirname, './prod')));
 
 app.get('*', (req, res)=>{
-  res.sendFile(path.join(__dirname, 'dist/smartDiet/index.html'));
+  if(allowedExt.filter(ext=> req.url.indexOf(ext) > 0).length > 0){
+    res.sendFile(path.join(__dirname, `./prod/dist/smartDiet/${req.url}`))
+  } else if(allowedExtUpload.filter(ext=> req.url.indexOf(ext) > 0).length > 0){
+    res.sendFile(path.join(__dirname, `./prod/images/${req.url}`))
+  } else {
+    res.sendFile(path.join(__dirname, './prod/dist/smartDiet/index.html'));
+  }
 });
 
 const port = process.env.PORT || '8150';

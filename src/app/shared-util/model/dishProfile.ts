@@ -1,8 +1,8 @@
 export interface DishProfile{
-  docketID: string,
+  userId: string,
   name: string,
-  user: string,
   price: number,
+  description: string,
   imgLocation: string,
   type: string,
   created_at: Date,

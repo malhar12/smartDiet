@@ -1,4 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
+
+import { UtilityService } from './../services/utility.service';
 
 import { FileUploader } from 'ng2-file-upload';
 import fontawesome from '@fortawesome/fontawesome';
@@ -14,9 +16,11 @@ const URL = './api/upload';
 export class FileUploadComponent implements OnInit {
 
   uploader:FileUploader;
+  @Input() type: string;
   @ViewChild('fileDropArea') public fileDropArea: ElementRef;
+  @Output() public onFileSelection: EventEmitter<FileUploader> = new EventEmitter<FileUploader>();
 
-  constructor() {
+  constructor(private _utility: UtilityService) {
     fontawesome.library.add(FaPlus);
     this.uploader = new FileUploader({
       url: URL
@@ -42,13 +46,33 @@ export class FileUploadComponent implements OnInit {
   fileSelected(event){
     // TODO
     console.log(event, 'SELECTED FILE');
-    this.uploader.queue[0].upload();
+    this.onFileSelection.emit(this.uploader);
+    this.notifyForm();
+    // this.uploader.queue[0].upload();
   }
 
   fileOverBase(event){
     // TODO
     console.log(event, 'SELECTED FILE');
-    this.uploader.queue[0].upload();
+    this.onFileSelection.emit(this.uploader);
+    this.notifyForm();
+    // this.uploader.queue[0].upload();
+  }
+
+  notifyForm(){
+    switch(this.type){
+      case 'starterDish': {
+        this._utility.editStarterMeta(true);
+        break;
+      }
+      case 'mainCourse': {
+        this._utility.editMainCourseMeta(true);
+        break;
+      }
+      default: {
+        break;
+      }
+    }
   }
 
 }
