@@ -1,0 +1,15 @@
+<div ng2FileDrop
+    #fileDropArea
+    (fileOver)="fileHovered($event)"
+    (onFileDrop)="fileOverBase($event)"
+    [uploader]="uploader"
+    class="well file-upload-section">
+    <div class="inner-section">
+      <form>
+        <input #fileUploadInput name="file" ng2FileSelect class="file-input" type="file" accept=".image/*" (change)="fileSelected($event)" [uploader]="uploader" />
+        <span (click)="fileUploadInput.click()">
+          <i class="fas fa-plus" style="cursor:pointer;"></i>
+        </span>
+    </form>
+    </div>
+</div>

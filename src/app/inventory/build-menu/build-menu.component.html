@@ -1,0 +1,52 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="container-box">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="slide-container">
+              <h3>Starter Dishes</h3>
+              <p-carousel></p-carousel>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-4">
+                <app-file-upload type="starterDish" (onFileSelection)="selectedImage($event)"></app-file-upload>
+              </div>
+              <div class="col-sm-8">
+                <app-dish-setup-form type="starterDish"  (dishPayload)="submitDish($event)"></app-dish-setup-form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="container-box">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="slide-container">
+              <h3>MainCourse Dishes</h3>
+              <p-carousel></p-carousel>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-4">
+                <app-file-upload type="mainCourse" (onFileSelection)="selectedImage($event)"></app-file-upload>
+              </div>
+              <div class="col-sm-8">
+                <app-dish-setup-form type="mainCourse" (dishPayload)="submitDish($event)"></app-dish-setup-form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
