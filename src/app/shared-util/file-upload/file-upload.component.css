@@ -1,6 +1,6 @@
 .file-upload-section{
   width: 100%;
-  height: 100%;
+  height: 220px;
   text-align: center;
   border: 1px dashed #0076cb;
   font-size: 60px;
@@ -14,6 +14,8 @@
   top: 30%;
   text-align: center;
   width: 100%;
+  left: 0;
+  margin: 5px 0;
 }
 
 .file-upload-section-hover{

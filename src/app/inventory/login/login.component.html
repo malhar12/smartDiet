@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <form class="form-signin" #loginForm="ngForm" (ngSubmit)="onFormSubmit(loginForm.value, loginForm)" encrypt="multipart/form-data">
+        <h1 class="h3 mb-3 font-weight-normal form-title">Please sign in</h1>
+        <div class="form-group">
+          <label for="userIdInput">User ID</label>
+          <input type="email" required class="form-control" id="userIdInput" ngModel name="userId" aria-describedby="userIdHelp" placeholder="Enter User Id" pInputText>
+        </div>
+        <div class="form-group">
+          <label for="passwordInput">Password</label>
+          <input type="password" required class="form-control" id="passwordInput" ngModel name="password" placeholder="Enter password" pInputText>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="!loginForm.valid">SignIn</button>
+      </form>
+    </div>
+  </div>
+</div>

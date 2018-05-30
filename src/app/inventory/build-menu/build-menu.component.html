@@ -1,51 +1,95 @@
-<div class="container-fluid">
+<div class="container">
   <div class="row">
-    <div class="col-sm-6">
-      <div class="container-box">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="slide-container">
-              <h3>Starter Dishes</h3>
-              <p-carousel></p-carousel>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="row">
-              <div class="col-sm-4">
-                <app-file-upload type="starterDish" (onFileSelection)="selectedImage($event)"></app-file-upload>
-              </div>
-              <div class="col-sm-8">
-                <app-dish-setup-form type="starterDish"  (dishPayload)="submitDish($event)"></app-dish-setup-form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="col-sm-12">
+      <app-navbar></app-navbar>
     </div>
-    <div class="col-sm-6">
-      <div class="container-box">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="slide-container">
-              <h3>MainCourse Dishes</h3>
-              <p-carousel></p-carousel>
+  </div>
+  <div class="row">
+    <p-growl [(value)]="msgs"></p-growl>
+    <div class="col-sm-12">
+      <div class="col-sm-6 container-box-pos">
+        <div class="container-box">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="slide-container">
+                <h3>Starter Dishes</h3>
+                <p-dataList [value]="starterDishes" [paginator]="true" [rows]="7" emptyMessage="No Dishes available in this section">
+                  <ng-template let-item pTemplate="item">
+                    <div class="row card-contianer">
+                      <div class="col-sm-4">
+                        <div class="dish-image-container">
+                          <img class="card-img-top" [src]="item.imgLocation" onError="this.src='./placeholder.png';" alt="Card image cap">
+                        </div>
+                      </div>
+                      <div class="col-sm-8">
+                        <div class="dish-details-container">
+                          <div class="dish-details-body">
+                            <h5 class="dish-details-title">{{item.name}}</h5>
+                            <p class="dish-details-price">{{item.price | currency:'USD'}}</p>
+                            <p class="dish-details-text">{{item.description}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </p-dataList>
+                <div *ngIf="user.isAdmin" class="row" style="margin-bottom:20px;">
+                  <div class="col-sm-4">
+                    <app-file-upload type="starterDish" (onFileSelection)="selectedImage($event)"></app-file-upload>
+                  </div>
+                  <div class="col-sm-8">
+                    <app-dish-setup-form type="starterDish"  (dishPayload)="submitDish($event)"></app-dish-setup-form>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="row">
-              <div class="col-sm-4">
-                <app-file-upload type="mainCourse" (onFileSelection)="selectedImage($event)"></app-file-upload>
-              </div>
-              <div class="col-sm-8">
-                <app-dish-setup-form type="mainCourse" (dishPayload)="submitDish($event)"></app-dish-setup-form>
+        <!-- <div class="sample-container">
+          <p-progressSpinner style="position: absolute;top:50%; width:100%;text-align:center;z-index:599"></p-progressSpinner>
+        </div> -->
+      </div>
+      <div class="col-sm-6 container-box-pos">
+        <div class="container-box">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="slide-container">
+                <h3>MainCourse Dishes</h3>
+                <p-dataList [value]="mainCourseDishes" [paginator]="true" [rows]="7" emptyMessage="No Dishes available in this section">
+                  <ng-template let-item pTemplate="item">
+                    <div class="row card-contianer">
+                      <div class="col-sm-4">
+                        <div class="dish-image-container">
+                          <img class="card-img-top" [src]="item.imgLocation" onError="this.src='./placeholder.png';" alt="Card image cap">
+                        </div>
+                      </div>
+                      <div class="col-sm-8">
+                        <div class="dish-details-container">
+                          <div class="dish-details-body">
+                            <h5 class="dish-details-title">{{item.name}}</h5>
+                            <p class="dish-details-price">{{item.price | currency:'USD'}}</p>
+                            <p class="dish-details-text">{{item.description}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </p-dataList>
+                <div *ngIf="user.isAdmin" class="row" style="margin-bottom:20px;">
+                  <div class="col-sm-4">
+                    <app-file-upload type="mainCourse" (onFileSelection)="selectedImage($event)"></app-file-upload>
+                  </div>
+                  <div class="col-sm-8">
+                    <app-dish-setup-form  type="mainCourse" (dishPayload)="submitDish($event)"></app-dish-setup-form>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <!-- <div class="sample-container">
+          <p-progressSpinner style="position: absolute;top:50%; width:100%;text-align:center;z-index:599"></p-progressSpinner>
+        </div> -->
       </div>
     </div>
   </div>

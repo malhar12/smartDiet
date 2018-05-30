@@ -1,0 +1,9 @@
+.menu-title{
+  margin-top: 40px;
+  text-align: center;
+}
+
+li.nav-item .nav-link.active {
+  color: #fff;
+  background-color: #0076cb;
+}

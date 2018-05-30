@@ -1,0 +1,48 @@
+.planner-container-box{
+margin: 20px;
+}
+
+.selection-container{
+  padding: 5px;
+}
+
+.selection-container .selection-month{
+  font-size: 14px;
+}
+
+.selection-container .selection-week{
+  font-size: 14px;
+}
+
+.selection-container .selection-month{
+  font-size: 14px;
+}
+
+.selection-details-container{
+  padding: 5px;
+}
+
+.selection-details-container .selection-list{
+  list-style: none;
+  padding-left: 0;
+}
+
+.selection-details-container .selection-list > li{
+  font-size: 12px;
+}
+
+::ng-deep .ui-datalist{
+  margin-bottom: 20px;
+}
+
+::ng-deep .ui-datalist .ui-datalist-data>li{
+  list-style-type: none;
+  border: 1px solid #c7c7c7;
+  margin: 10px 0;
+  border-radius: 4px;
+  box-shadow: 5px 5px 4px #c7c7c7;
+}
+
+::ng-deep .ui-datalist .ui-datalist-content.ui-widget-content, .slide-container ::ng-deep .ui-datalist .ui-paginator-bottom{
+  border: 0;
+}

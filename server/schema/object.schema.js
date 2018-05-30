@@ -3,10 +3,18 @@
 const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var SelectionSchema = new Schema({
+  date: Date,
+  dishId1: {type: mongoose.Schema.Types.ObjectId, ref: 'Dish'},
+  dishId2: {type: mongoose.Schema.Types.ObjectId, ref: 'Dish'}
+});
+
 // Schema Object
 var schemaObj = {
   DishSchema: new Schema({
+    _id: mongoose.Schema.Types.ObjectId,
     userId: String,
+    dishId: String,
     name: {type: String, required: false},
     price: Number,
     description: String,
@@ -16,11 +24,29 @@ var schemaObj = {
     updated_at: Date
   }),
   UserSchema: new Schema({
-    name: String,
+    _id: mongoose.Schema.Types.ObjectId,
     userId: {type: String, required: true, unique: true},
     password: {type: String, required: true},
-    admin: Boolean,
-    created_at: Date
+    isAdmin: Boolean
+  }),
+  ScheduleSchema: new Schema({
+    scheduleId:String,
+    month: Number,
+    userId: String,
+    selection: [{
+      date: Date,
+      dishId1: {type: mongoose.Schema.Types.ObjectId, ref: 'Dish'},
+      dishId2: {type: mongoose.Schema.Types.ObjectId, ref: 'Dish'}
+    }]
+  }),
+  EventsSchema: new Schema({
+    userId: String,
+    allDay: Boolean,
+    start: Date,
+    end: Date,
+    editable: Boolean,
+    title: String,
+    textColor: String
   })
 };
 
@@ -41,5 +67,7 @@ schemaObj.UserSchema.methods.createdAt = () => {
 
 module.exports = {
   DishModel: mongoose.model('Dish', schemaObj.DishSchema),
-  UserModel: mongoose.model('User', schemaObj.UserSchema)
+  UserModel: mongoose.model('User', schemaObj.UserSchema),
+  ScheduleModel: mongoose.model('Schedule', schemaObj.ScheduleSchema),
+  EventsModel: mongoose.model('Event', schemaObj.EventsSchema)
 };
