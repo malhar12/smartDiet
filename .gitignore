@@ -6,7 +6,6 @@ prod/dist
 public/
 /tmp
 /out-tsc
-prod/images/*.jpg
 
 # dependencies
 /node_modules
