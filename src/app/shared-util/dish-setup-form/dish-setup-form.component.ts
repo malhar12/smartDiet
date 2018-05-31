@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { DishProfile } from './../model/DishProfile';
+import { DishProfile } from './../model/dishProfile';
 
 import { UtilityService } from './../services/utility.service';
 
