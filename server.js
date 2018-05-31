@@ -49,12 +49,12 @@ app.get('*', (req, res)=>{
   }
 });
 
-const port = process.env.PORT || '8150';
+// const port = process.env.PORT || '8150';
 
-app.set('port', port);
+// app.set('port', port);
 
 const httpServer = http.createServer(app);
 
-httpServer.listen(port, ()=>{
-  console.log('server running on port*****', port);
+httpServer.listen(process.env.PORT || '8150', ()=>{
+  console.log('server running on port*****');
 });
