@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng build --aot --prod && node server.js",
+    "start": "node server.js",
     "build": "ng build && node server.js",
     "prod": "ng build --aot --prod && node server.js",
-    "postinstall": "ng build --aot --prod && node server.js",
+    "postinstall": "ng build --aot --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
