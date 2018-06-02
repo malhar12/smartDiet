@@ -32,21 +32,29 @@ app.use('/api', api);
 app.use(express.static(path.join(__dirname, './prod')));
 
 app.get('*', (req, res)=>{
-  if(allowedExt.filter(ext=> req.url.indexOf(ext) > 0).length > 0){
-    res.sendFile(path.join(__dirname, `./prod/dist/smartDiet/${req.url}`))
-  } else if(allowedExtUpload.filter(ext=> req.url.indexOf(ext) > 0).length > 0){
-    res.sendFile(path.join(__dirname, `./prod/images/${req.url}`))
+  // console.log(req.url, 'URL Requested');
+  let url = req.url;
+  if(req.url.includes('?')){
+    let tempStr = req.url.split('?');
+    url = tempStr[0];
+  }
+  // console.log(path.join(__dirname, `./prod/dist/smartDiet/${url}`), 'Path1');
+  // console.log(path.resolve(`./prod/dist/smartDiet/${url}`), 'Path2');
+  if(allowedExt.filter(ext=> url.indexOf(ext) > 0).length > 0){
+    res.sendFile(path.join(__dirname, `./prod/dist/smartDiet/${url}`))
+  } else if(allowedExtUpload.filter(ext=> url.indexOf(ext) > 0).length > 0){
+    res.sendFile(path.join(__dirname, `./prod/images/${url}`))
   } else {
     res.sendFile(path.join(__dirname, './prod/dist/smartDiet/index.html'));
   }
 });
 
-const port = process.env.PORT || '8150';
+// const port = process.env.PORT || '8150';
 
-app.set('port', port);
+// app.set('port', port);
 
 const httpServer = http.createServer(app);
 
-httpServer.listen(port, ()=>{
-  console.log('server running on port*****', port);
+httpServer.listen(process.env.PORT || '8150', ()=>{
+  console.log('server running on port*****');
 });

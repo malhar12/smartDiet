@@ -1,4 +1,4 @@
-<form #dishForm="ngForm" (ngSubmit)="onFormSubmit(dishForm.value)" encrypt="multipart/form-data">
+<form #dishForm="ngForm" (ngSubmit)="onFormSubmit(dishForm.value, dishForm)" encrypt="multipart/form-data">
   <div class="form-group">
     <label for="nameInput1">Dish Name</label>
     <input type="text" class="form-control" id="nameInput1" ngModel name="name" aria-describedby="emailHelp" placeholder="Enter dish name" pInputText>

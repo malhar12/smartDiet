@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { DishProfile } from './../model/DishProfile';
+import { DishProfile } from './../model/dishProfile';
 
 import { UtilityService } from './../services/utility.service';
 
@@ -28,9 +28,11 @@ export class DishSetupFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  onFormSubmit(formValue){
+  onFormSubmit(formValue, dishForm: any){
     this.dishPayload.emit({
+      _id: '',
       userId: '001',
+      dishId: 'Dish_',
       name: formValue.name,
       price: formValue.price,
       description: formValue.description,
@@ -39,6 +41,8 @@ export class DishSetupFormComponent implements OnInit, OnDestroy {
       created_at: new Date(),
       updated_at: new Date()
     });
+
+    dishForm.resetForm();
   }
 
   ngOnDestroy(){

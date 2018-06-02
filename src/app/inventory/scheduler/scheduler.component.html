@@ -1,0 +1,55 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <app-navbar></app-navbar>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="planner-container-box">
+        <p-schedule [events]="events" [header]="headerConfig" weekNumbers="'true'" (onDayClick)="daySelection($event)"></p-schedule>
+      </div>
+    </div>
+    <div class="col-sm-4"style="border-left:1px solid #c7c7c7;">
+      <h2>Dietary Selections:</h2>
+      <p-dataList [value]="cards" [paginator]="true" [rows]="10">
+        <ng-template let-item pTemplate="item">
+          <div class="row card-contianer">
+            <div class="col-sm-5">
+              <div class="selection-container">
+                <h2>{{item.year}}</h2>
+                <div class="selection-month">{{monthNames[item.month]}}</div>
+                <div class="selection-week">WeekNumber: {{item.scheduleId}}</div>
+              </div>
+            </div>
+            <div class="col-sm-7">
+              <div class="selection-details-container">
+                <div class="selection-details-body">
+                  <ul class="selection-list">
+                    <li *ngFor="let dish of item.selection">
+                      <div>(S)&nbsp;{{dish.dishId1.name}}----{{dish.dishId1.price | currency:'USD'}}</div>
+                      <div>(M)&nbsp;{{dish.dishId2.name}}----{{dish.dishId2.price | currency:'USD'}}</div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-dataList>
+    </div>
+  </div>
+</div>
+<p-dialog header="Select Dishes for the day" [(visible)]="display">
+  <form #plannerForm="ngForm" (ngSubmit)="onFormSubmit(plannerForm.value, plannerForm)" encrypt="multipart/form-data">
+    <div class="form-group">
+      <label for="nameInput1">Starter Dish</label>
+      <p-dropdown [options]="starterDishes | toSelectItem" id="nameInput1" [(ngModel)]="selectedStarterDish" name="starterDish" required></p-dropdown>
+    </div>
+    <div class="form-group">
+      <label for="nameInput2">Main Course Dish</label>
+      <p-dropdown [options]="mainCourseDishes | toSelectItem" id="nameInput2" [(ngModel)]="selectedMainCourseDish" name="mainCourseDish" required></p-dropdown>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!plannerForm.valid">Add</button>
+  </form>
+</p-dialog>

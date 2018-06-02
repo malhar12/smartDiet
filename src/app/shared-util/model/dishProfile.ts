@@ -1,5 +1,7 @@
 export interface DishProfile{
+  _id: string,
   userId: string,
+  dishId: string,
   name: string,
   price: number,
   description: string,
