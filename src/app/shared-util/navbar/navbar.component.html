@@ -4,4 +4,5 @@
   </span>
   <button class="btn btn-primary navbar-btn" type="button"(click)="routenavigate('/menuInventory')">Menu Inventory</button>
   <button class="btn btn-info navbar-btn" *ngIf="!user.isAdmin" type="button"(click)="routenavigate('/planner')">Planner</button>
+  <button class="btn btn-danger navbar-btn" type="button" (click)="logout()">Logout</button>
 </nav>

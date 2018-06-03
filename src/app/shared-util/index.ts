@@ -1,6 +1,11 @@
 export { FileUploadComponent } from './file-upload/file-upload.component';
 export { DishSetupFormComponent } from './dish-setup-form/dish-setup-form.component';
+export { LoginComponent } from './login/login.component';
+export { LoginService } from './login/login.service';
+export { LogoutService } from './login/logout.service';
+export { NavbarComponent } from './navbar/navbar.component';
 export { UtilityService } from './services/utility.service';
+export { AuthGuardService } from './guards/auth.guard';
 export { DishProfile } from './model/dishProfile';
 export { TransformToSelectItemPipe } from './pipes/transformItem.pipe';
 export { SharedUtilModule } from './shared-util.module';

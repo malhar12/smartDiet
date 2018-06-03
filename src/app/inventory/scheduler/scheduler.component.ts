@@ -50,7 +50,13 @@ export class SchedulerComponent implements OnInit {
       resultset[1].payload.forEach((card)=>{
         let date = new Date(card.selection[0].date);
         card['year'] = date.getFullYear();
-        console.log(card);
+
+        let sum = 0;
+        card.selection.forEach((select)=>{
+          sum += select.dishId1.price + select.dishId2.price;
+        });
+
+        card['total'] = sum;
       });
 
       this.cards = resultset[1].payload;
