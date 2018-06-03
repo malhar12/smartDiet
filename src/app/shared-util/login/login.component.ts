@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { LoginService } from './login.service';
-import { UtilityService } from './../../shared-util';
+import { UtilityService } from './../services/utility.service';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   constructor(private _router:Router, private _loginService: LoginService, private _utility: UtilityService) { }
 
   ngOnInit() {
+    this._utility.setUserProfile(null);
   }
 
   routenavigate(route: any){
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
               .subscribe((data)=>{
                 form.resetForm();
                 this._utility.setUserProfile(data.payload);
+                localStorage.setItem('auth_token', data.payload.token);
                 this._router.navigate(['/menuInventory', data.payload.userId], {queryParamsHandling: 'preserve', preserveFragment: true});
               }, (error)=>{
                 console.log(error);

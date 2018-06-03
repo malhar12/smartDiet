@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, OnChanges, SimpleChanges, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { UtilityService } from './../../shared-util';
+import { UtilityService } from './../services/utility.service';
+import { LogoutService } from './../login/logout.service';
 
 @Component({
   selector: 'app-navbar',
@@ -17,7 +18,7 @@ export class NavbarComponent implements OnInit, OnChanges {
   };
   @Output() menuToggle: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor(private _utility: UtilityService, private _router: Router) { }
+  constructor(private _utility: UtilityService, private _router: Router, private _logout: LogoutService) { }
 
   ngOnInit() {
     this.user = this._utility.getUserProfile();
@@ -31,6 +32,15 @@ export class NavbarComponent implements OnInit, OnChanges {
 
   routenavigate(route: string){
     this._router.navigate([route, this.user.userId], {queryParamsHandling: 'preserve', preserveFragment: true});
+  }
+
+  logout(){
+    this._logout.logout()
+                .subscribe(()=>{
+                  localStorage.removeItem('auth_token');
+                  console.log('Logged Out of the System');
+                  this._router.navigate(['/login']);
+                });
   }
 
 }

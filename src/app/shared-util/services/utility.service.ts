@@ -8,7 +8,7 @@ export class UtilityService {
   public enableStarterForm: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public enableMainCourseForm: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  private user: any;
+  public user: any;
 
   editStarterMeta(options: boolean){
     this.enableStarterForm.next(options);
@@ -24,5 +24,13 @@ export class UtilityService {
 
   getUserProfile(){
     return this.user;
+  }
+
+  getUserToken(){
+    if(this.user){
+      return this.user.token;
+    }
+
+    return null;
   }
 }

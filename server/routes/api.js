@@ -9,6 +9,9 @@ const dbModels = require('./../schema/object.schema');
 const multer = require('multer');
 const path = require('path');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+const authorize = require('./../middlewares/authorize');
 
 var timeStamp = null;
 
@@ -94,10 +97,17 @@ router.post('/signin', formSubmit, (request, response)=>{
           }
 
           if(result){
+            const token = jwt.sign({
+              userId: user.userId,
+              isAdmin: user.isAdmin
+            }, 'BUENOSECRETKEY', {
+              expiresIn: '1h'
+            });
             return response.status(200).json({
               'payload': {
                 userId: user.userId,
-                isAdmin: user.isAdmin
+                isAdmin: user.isAdmin,
+                token: token
               }
             });
           } else {
@@ -107,8 +117,14 @@ router.post('/signin', formSubmit, (request, response)=>{
       });
 });
 
+// User Logout
+router.get('/signout', function(request, response) {
+  // response.redirect('/');
+  response.status(200).json({'payload': 'Logged out of system'});
+});
+
 // Save Image to DataBase
-router.post('/upload', uploader, (request, response)=>{
+router.post('/upload', authorize, uploader, (request, response)=>{
   let payload = JSON.parse(request.body.data);
   let tempSplit = payload.imgLocation.split('_');
   let dish = new Dish({
@@ -144,7 +160,7 @@ router.post('/upload', uploader, (request, response)=>{
 });
 
 // Get All StarterDishes
-router.get('/getAllStarterDishes', (request, response)=>{
+router.get('/getAllStarterDishes', authorize, (request, response)=>{
   let res = {};
   Dish.find({'type': 'starterDish'}, (error, data)=>{
     if(error){
@@ -156,7 +172,7 @@ router.get('/getAllStarterDishes', (request, response)=>{
 });
 
 // get Filtered Starter Dishes
-router.get('/getStarterDishes', (request, response)=>{
+router.get('/getStarterDishes', authorize, (request, response)=>{
   let payload = request.query.scheduleId;
   let dishSelections = [];
 
@@ -187,7 +203,7 @@ router.get('/getStarterDishes', (request, response)=>{
 });
 
 // Get All MainCourseDishes
-router.get('/getAllMainCourseDishes', (request, response)=>{
+router.get('/getAllMainCourseDishes', authorize, (request, response)=>{
   let res = {};
   Dish.find({'type': 'mainCourse'}, (error, data)=>{
     if(error){
@@ -199,7 +215,7 @@ router.get('/getAllMainCourseDishes', (request, response)=>{
 });
 
 // get Filtered MainCourse Dishes
-router.get('/getMainCourseDishes', (request, response)=>{
+router.get('/getMainCourseDishes', authorize, (request, response)=>{
   let payload = request.query.scheduleId;
   let dishSelections = [];
   Schedule.findOne({'scheduleId': payload}, (error, schedule)=>{
@@ -229,7 +245,7 @@ router.get('/getMainCourseDishes', (request, response)=>{
 });
 
 // Update a schedule
-router.post('/updateSchedule', formSubmit, (request, response)=>{
+router.post('/updateSchedule', authorize, formSubmit, (request, response)=>{
   // console.log(request);
   let payload = request.body;
   console.log(payload, '<-Submitted Schedule');
@@ -273,7 +289,7 @@ router.post('/updateSchedule', formSubmit, (request, response)=>{
           });
 });
 
-router.get('/getAllSchedules', (request, response)=>{
+router.get('/getAllSchedules', authorize, (request, response)=>{
   let payload = request.query.userId;
   Schedule.find({userId: payload})
           .select('scheduleId month selection')
@@ -289,7 +305,7 @@ router.get('/getAllSchedules', (request, response)=>{
 });
 
 // Get All Events
-router.get('/getAllEvents', (request, response)=>{
+router.get('/getAllEvents', authorize, (request, response)=>{
   let payload = request.query.userId;
   Events.find({'userId': payload}, (error, data)=>{
     if(error){
@@ -301,7 +317,7 @@ router.get('/getAllEvents', (request, response)=>{
 });
 
 // Update an Event
-router.post('/updateEvent', formSubmit, (request, response)=>{
+router.post('/updateEvent', authorize, formSubmit, (request, response)=>{
   // console.log(request);
   let payload = request.body;
   let event = new Events({

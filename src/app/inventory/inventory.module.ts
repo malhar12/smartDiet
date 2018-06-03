@@ -9,9 +9,6 @@ import { MenuService } from './build-menu/build-menu.service';
 import { SharedUtilModule } from './../shared-util';
 import { SchedulerComponent } from './scheduler/scheduler.component';
 import { SchedulerService } from './scheduler/scheduler.service';
-import { LoginComponent } from './login/login.component';
-import { LoginService } from './login/login.service';
-import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   imports: [
@@ -25,11 +22,9 @@ import { NavbarComponent } from './navbar/navbar.component';
     HttpClientModule,
     InventoryRoutesModule,
     BuildMenuComponent,
-    SchedulerComponent,
-    NavbarComponent,
-    LoginComponent
+    SchedulerComponent
   ],
-  declarations: [BuildMenuComponent, SchedulerComponent, LoginComponent, NavbarComponent],
-  providers: [MenuService, SchedulerService, LoginService]
+  declarations: [BuildMenuComponent, SchedulerComponent],
+  providers: [MenuService, SchedulerService]
 })
 export class InventoryModule { }
